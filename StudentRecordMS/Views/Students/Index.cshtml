@@ -1,0 +1,46 @@
+﻿@model StudentRecordMS.Models.Student
+@{
+    ViewBag.Title = "My Record";
+}
+
+<div class="container mt-4">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    <div style="position:absolute; top:10px; right:10px;">
+        <a href="@Url.Action("Logout", "Students")" class="btn btn-danger">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+    <h3 class="mb-3">My Academic Record</h3>
+
+    @if (Model != null)
+    {
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="fa-solid fa-graduation-cap me-2"></i>@Model.Name</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr><th>Roll Number</th><td>@Model.RollNumber</td></tr>
+                    <tr><th>Maths</th><td>@Model.Maths / 100</td></tr>
+                    <tr><th>Physics</th><td>@Model.Physics / 100</td></tr>
+                    <tr><th>Chemistry</th><td>@Model.Chemistry / 100</td></tr>
+                    <tr><th>English</th><td>@Model.English / 100</td></tr>
+                    <tr><th>Programming</th><td>@Model.Programming / 100</td></tr>
+                    <tr>
+                        <th>Total</th>
+                        <td><strong>@(Model.Maths + Model.Physics + Model.Chemistry + Model.English + Model.Programming) / 500</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">No record found for your account.</div>
+    }
+</div>

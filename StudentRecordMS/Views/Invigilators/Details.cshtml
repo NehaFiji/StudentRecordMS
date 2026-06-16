@@ -1,0 +1,31 @@
+﻿@model StudentRecordMS.Models.Student
+@{
+    ViewBag.Title = "Student Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h4><i class="fa-solid fa-id-card me-2"></i>Student Record</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr><th>Roll Number</th><td>@Model.RollNumber</td></tr>
+                <tr><th>Name</th><td>@Model.Name</td></tr>
+                <tr><th>Maths</th><td>@Model.Maths</td></tr>
+                <tr><th>Physics</th><td>@Model.Physics</td></tr>
+                <tr><th>Chemistry</th><td>@Model.Chemistry</td></tr>
+                <tr><th>English</th><td>@Model.English</td></tr>
+                <tr><th>Programming</th><td>@Model.Programming</td></tr>
+                <tr>
+                    <th>Total</th>
+                    <td><strong>@(Model.Maths + Model.Physics + Model.Chemistry + Model.English + Model.Programming) / 500</strong></td>
+                </tr>
+            </table>
+            <a asp-action="Edit" asp-route-rollNumber="@Model.RollNumber" class="btn btn-warning">
+                <i class="fa-solid fa-pen-to-square"></i> Edit Marks
+            </a>
+            <a asp-action="List" class="btn btn-secondary ms-2">Back to List</a>
+        </div>
+    </div>
+</div>

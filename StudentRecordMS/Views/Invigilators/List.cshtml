@@ -1,0 +1,111 @@
+﻿@model IEnumerable<StudentRecordMS.Models.Student>
+@{
+    ViewBag.Title = "All Students";
+}
+
+<div class="container mt-3">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    <div class="d-flex align-items-center mb-3 gap-2">
+        <form asp-controller="Invigilators" asp-action="List" method="get">
+            <div class="input-group" style="width:400px;">
+                <input type="text" name="searchTerm" value="@ViewBag.SearchTerm"
+                       class="form-control" placeholder="Search by name or roll number..." />
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search
+                </button>
+            </div>
+        </form>
+        <a asp-controller="Invigilators" asp-action="Create" class="btn btn-success">
+            <i class="fa-solid fa-user-plus"></i> Add Student
+        </a>
+        <a asp-controller="Invigilators" asp-action="Index" class="btn btn-secondary ms-auto">
+            <i class="fa-solid fa-house"></i> Dashboard
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Maths</th>
+                <th>Physics</th>
+                <th>Chemistry</th>
+                <th>English</th>
+                <th>Programming</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.RollNumber</td>
+                    <td>@item.Name</td>
+                    <td>@item.Maths</td>
+                    <td>@item.Physics</td>
+                    <td>@item.Chemistry</td>
+                    <td>@item.English</td>
+                    <td>@item.Programming</td>
+                    <td>
+                        <a asp-action="Details" asp-route-rollNumber="@item.RollNumber"
+                           class="btn btn-info text-white">
+                            <i class="fa-solid fa-eye"></i> View
+                        </a>
+                        <a asp-action="Edit" asp-route-rollNumber="@item.RollNumber"
+                           class="btn btn-warning">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                        </a>
+                        <button type="button" class="btn btn-danger"
+                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                data-roll="@item.RollNumber" data-name="@item.Name">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true"
+     data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong id="studentName"></strong>
+                (Roll No: <strong id="studentRollText"></strong>)?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form asp-action="Delete" asp-controller="Invigilators" method="post">
+                    <input type="hidden" id="studentRoll" name="rollNumber" />
+                    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var roll = button.getAttribute('data-roll');
+            var name = button.getAttribute('data-name');
+            document.getElementById('studentRollText').textContent = roll;
+            document.getElementById('studentRoll').value = roll;
+            document.getElementById('studentName').textContent = name;
+        });
+    </script>
+}

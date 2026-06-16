@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Student Record</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EMSvFebruary2026.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <style>
+        :root {
+            --sage: #7C9A7E;
+            --sage-dark: #5E7E60;
+            --sage-light: #EAF0EA;
+        }
+
+        .navbar {
+            background-color: var(--sage) !important;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: var(--sage) !important;
+            border-color: var(--sage-dark) !important;
+        }
+
+            .btn-primary:hover {
+                background-color: var(--sage-dark) !important;
+            }
+
+        .btn-success {
+            background-color: #4E7B52 !important;
+            border-color: #3a5e3d !important;
+        }
+
+            .btn-success:hover {
+                background-color: #3a5e3d !important;
+            }
+
+        .card-header.bg-primary {
+            background-color: var(--sage) !important;
+        }
+
+        .card-header.bg-success {
+            background-color: #4E7B52 !important;
+        }
+
+        .table-primary {
+            background-color: var(--sage-light) !important;
+        }
+
+            .table-primary th {
+                color: var(--sage-dark);
+            }
+
+        .btn-outline-primary {
+            color: var(--sage-dark) !important;
+            border-color: var(--sage-dark) !important;
+        }
+
+            .btn-outline-primary:hover {
+                background-color: var(--sage) !important;
+                color: white !important;
+            }
+
+        footer {
+            background-color: var(--sage-light);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Logins" asp-action="Login">
+                    <i class="fa-solid fa-graduation-cap me-2"></i>Student Record MS
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-4">
+        <div class="container py-2">
+            &copy; 2026 - Student Record Management System
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

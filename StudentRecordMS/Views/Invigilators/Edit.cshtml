@@ -1,0 +1,70 @@
+﻿@model StudentRecordMS.Models.Student
+@{
+    ViewBag.Title = "Edit Marks";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-warning">
+            <h4><i class="fa-solid fa-pen-to-square me-2"></i>Edit Marks — @Model.Name</h4>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Invigilators" asp-action="Edit" method="post">
+                <input asp-for="RollNumber" type="hidden" />
+                <input asp-for="Name" type="hidden" />
+
+                <!-- Roll Number -->
+                <div class="mb-3">
+                    <label class="form-label">Roll Number</label>
+                    <input type="text" class="form-control" value="@Model.RollNumber" readonly />
+                </div>
+
+                <!-- Name -->
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" value="@Model.Name" readonly />
+                </div>
+
+                <!-- Marks -->
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Maths" class="form-label"></label>
+                        <input asp-for="Maths" type="number" class="form-control" />
+                        <span asp-validation-for="Maths" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Physics" class="form-label"></label>
+                        <input asp-for="Physics" type="number" class="form-control" />
+                        <span asp-validation-for="Physics" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Chemistry" class="form-label"></label>
+                        <input asp-for="Chemistry" type="number" class="form-control" />
+                        <span asp-validation-for="Chemistry" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="English" class="form-label"></label>
+                        <input asp-for="English" type="number" class="form-control" />
+                        <span asp-validation-for="English" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Programming" class="form-label"></label>
+                        <input asp-for="Programming" type="number" class="form-control" />
+                        <span asp-validation-for="Programming" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-warning">
+                    <i class="fa-solid fa-floppy-disk"></i> Update Marks
+                </button>
+                <a asp-controller="Invigilators" asp-action="List" class="btn btn-secondary ms-2">
+                    Back to List
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

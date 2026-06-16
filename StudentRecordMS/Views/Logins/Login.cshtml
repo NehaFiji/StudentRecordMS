@@ -1,0 +1,102 @@
+﻿@model StudentRecordMS.ViewModel.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>
+                        <i class="fa-solid fa-graduation-cap me-2"></i>
+                        Student Record MS
+                    </h4>
+                </div>
+
+                ```
+                <div class="card-body p-4">
+
+                    @* Error Message *@
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <form asp-action="Login" method="post" autocomplete="off">
+
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        @* Hidden dummy fields to block autofill *@
+                        <input type="text" style="display:none">
+                        <input type="password" style="display:none">
+
+                        @* Username *@
+                        <div class="mb-3">
+                            <label asp-for="UserName" class="form-label"></label>
+                            <input asp-for="UserName"
+                                   class="form-control"
+                                   placeholder="Enter username"
+                                   autocomplete="new-username" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        @* Password *@
+                        <div class="mb-3">
+                            <label asp-for="UserPassword" class="form-label"></label>
+                            <div class="input-group">
+                                <input asp-for="UserPassword"
+                                       class="form-control"
+                                       placeholder="Enter password"
+                                       autocomplete="new-password"
+                                       id="passwordField" />
+                                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="UserPassword" class="text-danger"></span>
+                        </div>
+
+                        @* Submit Button *@
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary" id="loginBtn">
+                                Login
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    ```
+
+</div>
+
+@section Scripts {
+
+    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Toggle password visibility
+        function togglePassword() {
+            var pwd = document.getElementById("passwordField");
+            pwd.type = (pwd.type === "password") ? "text" : "password";
+        }
+
+        document.querySelectorAll("input").forEach(input => {
+            input.addEventListener("focus", function () {
+                this.setAttribute("autocomplete", "off");
+            });
+        });
+    </script>
+    
+
+}
